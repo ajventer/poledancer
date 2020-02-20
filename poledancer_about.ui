@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>516</width>
-    <height>350</height>
+    <width>847</width>
+    <height>421</height>
    </rect>
   </property>
   <property name="focusPolicy">
@@ -19,8 +19,8 @@
   <widget class="QPushButton" name="CloseAboutBtn">
    <property name="geometry">
     <rect>
-     <x>220</x>
-     <y>320</y>
+     <x>380</x>
+     <y>390</y>
      <width>112</width>
      <height>31</height>
     </rect>
@@ -34,8 +34,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>521</width>
-     <height>311</height>
+     <width>851</width>
+     <height>381</height>
     </rect>
    </property>
    <property name="verticalScrollBarPolicy">

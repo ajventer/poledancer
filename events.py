@@ -12,7 +12,8 @@ class MainwindowEvents(object):
         self.mainwindow = mainwindow
         self.mainwindow.actionQuit.triggered.connect(self.quitApplication)
         self.mainwindow.StatusBarButton.clicked.connect(self.Sequence)
-        self.mainwindow.actionAbout.triggered.connect(self.showAbout)
+        self.mainwindow.actionAbout.triggered.connect(lambda: self.showAbout('about'))
+        self.mainwindow.actionLicense.triggered.connect(lambda: self.showAbout('license'))
         self.mainwindow.actionCamera_Simulator_for_testing.triggered.connect(self.SimulatorConnect)
         self.mainwindow.statusbar.showMessage('Connect your camera to start')
         for cam in self.mainwindow.CameraMenu:
@@ -22,12 +23,17 @@ class MainwindowEvents(object):
         self.camera.exit()
         self.app.closeAllWindows()
 
-    def showAbout(self):
+    def showAbout(self, doc):
         here = os.path.abspath(os.path.dirname(os.path.realpath(__file__)))
         self.AboutDlg = QtWidgets.QDialog()
         self.About = Ui_About()
         self.About.setupUi(self.AboutDlg)
-        self.About.AboutText.setSource(QtCore.QUrl('file://%s/Docs/ABOUT.html' %here))
+        if doc == 'about':
+            self.AboutDlg.setWindowTitle("About Poledancer")
+            self.About.AboutText.setSource(QtCore.QUrl('file://%s/Docs/ABOUT.html' %here))
+        elif doc == 'license':
+            self.AboutDlg.setWindowTitle("Poledancer license")
+            self.About.AboutText.setSource(QtCore.QUrl('file://%s/Docs/COPYING.html' %here))
         self.About.CloseAboutBtn.clicked.connect(self.closeAbout)        
         self.AboutDlg.show()
         self.AboutDlg.exec_()

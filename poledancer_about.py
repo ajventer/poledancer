@@ -13,13 +13,15 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_About(object):
     def setupUi(self, About):
         About.setObjectName("About")
-        About.resize(516, 350)
+        About.resize(847, 421)
         About.setFocusPolicy(QtCore.Qt.TabFocus)
         self.CloseAboutBtn = QtWidgets.QPushButton(About)
-        self.CloseAboutBtn.setGeometry(QtCore.QRect(220, 320, 112, 31))
+        self.CloseAboutBtn.setGeometry(QtCore.QRect(380, 390, 112, 31))
         self.CloseAboutBtn.setObjectName("CloseAboutBtn")
         self.AboutText = QtWidgets.QTextBrowser(About)
-        self.AboutText.setGeometry(QtCore.QRect(0, 0, 521, 311))
+        self.AboutText.setGeometry(QtCore.QRect(0, 0, 851, 381))
+        self.AboutText.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
+        self.AboutText.setSizeAdjustPolicy(QtWidgets.QAbstractScrollArea.AdjustToContentsOnFirstShow)
         self.AboutText.setSource(QtCore.QUrl("file:///home/metalpoetza/Source/poledancer/Docs/ABOUT.html"))
         self.AboutText.setObjectName("AboutText")
 
