@@ -2,6 +2,7 @@ DESTDIR=/usr
 BINDIR=${DESTDIR}/bin
 ui:
 	pyuic5 -x poledancer_mainwindow.ui -o poledancer_mainwindow.py
+	pyuic5 -x poledancer_about.ui -o poledancer_about.py
 
 run: ui
 	chmod a+x poledancer.py

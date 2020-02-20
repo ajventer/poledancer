@@ -1,22 +1,39 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from poledancer_mainwindow import Ui_MainWindow
+from poledancer_about import Ui_About
 from time import sleep
 import camera
+import os
 
 class MainwindowEvents(object):
     def __init__(self, app, mainwindow):
         self.app = app
         self.mainwindow = mainwindow
-        self.mainwindow.actionQuit.triggered.connect(quitApplicationt)
+        self.mainwindow.actionQuit.triggered.connect(self.quitApplication)
         self.mainwindow.StatusBarButton.clicked.connect(self.Sequence)
+        self.mainwindow.actionAbout.triggered.connect(self.showAbout)
         self.mainwindow.actionCamera_Simulator_for_testing.triggered.connect(self.SimulatorConnect)
         self.mainwindow.statusbar.showMessage('Connect your camera to start')
         for cam in self.mainwindow.CameraMenu:
             cam.triggered.connect(lambda: self.CameraConnect(cam.objectName()))
 
     def quitApplication(self):
+        self.camera.exit()
         self.app.closeAllWindows()
+
+    def showAbout(self):
+        here = os.path.abspath(os.path.dirname(os.path.realpath(__file__)))
+        self.AboutDlg = QtWidgets.QDialog()
+        self.About = Ui_About()
+        self.About.setupUi(self.AboutDlg)
+        self.About.AboutText.setSource(QtCore.QUrl('file://%s/Docs/ABOUT.html' %here))
+        self.About.CloseAboutBtn.clicked.connect(self.closeAbout)        
+        self.AboutDlg.show()
+        self.AboutDlg.exec_()
+
+    def closeAbout(self):
+        self.AboutDlg.close()
 
 
     def SimulatorConnect(self):
