@@ -14,6 +14,7 @@ class MainwindowEvents(object):
         self.mainwindow.StatusBarButton.clicked.connect(self.Sequence)
         self.mainwindow.actionAbout.triggered.connect(lambda: self.showAbout('about'))
         self.mainwindow.actionLicense.triggered.connect(lambda: self.showAbout('license'))
+        self.mainwindow.actionManual.triggered.connect(lambda: self.showAbout('manual'))
         self.mainwindow.actionCamera_Simulator_for_testing.triggered.connect(self.SimulatorConnect)
         self.mainwindow.statusbar.showMessage('Connect your camera to start')
         for cam in self.mainwindow.CameraMenu:
@@ -34,6 +35,10 @@ class MainwindowEvents(object):
         elif doc == 'license':
             self.AboutDlg.setWindowTitle("Poledancer license")
             self.About.AboutText.setSource(QtCore.QUrl('file://%s/Docs/COPYING.html' %here))
+        elif doc == 'manual':
+            self.AboutDlg.setWindowTitle("Poledancer User's Manual")
+            self.About.AboutText.setSource(QtCore.QUrl('file://%s/Docs/MANUAL.html' %here))
+            self.AboutDlg.showMaximized()
         self.About.CloseAboutBtn.clicked.connect(self.closeAbout)        
         self.AboutDlg.show()
         self.AboutDlg.exec_()
