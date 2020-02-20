@@ -23,9 +23,14 @@ class Camera(object):
         return camera_list
 
 
-    def connect(self):
+    def connect(self, cam):
         self.camera = gp.check_result(gp.gp_camera_new())
+        port_info_list = gp.PortInfoList()
+        port_info_list.load()
+        idx = port_info_list.lookup_path(cam)
+        self.camera.set_port_info(port_info_list[idx])
         gp.check_result(gp.gp_camera_init(self.camera))
+        print (self.camera.get_summary())
         # required configuration will depend on camera type!
         print('Checking camera config')
         # get configuration tree
@@ -48,6 +53,10 @@ class Camera(object):
         # image.save(TiffPath)
         return qimage
 
+    def exit(self):
+        self.camera.exit()
+
+
 
 class CameraSimulator(Camera):
     def __init__(self):
@@ -68,3 +77,6 @@ class CameraSimulator(Camera):
         else:
             self.imageid = 0        
         return qimage
+
+    def exit(self):
+        pass

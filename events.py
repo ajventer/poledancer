@@ -8,12 +8,16 @@ class MainwindowEvents(object):
     def __init__(self, app, mainwindow):
         self.app = app
         self.mainwindow = mainwindow
-        self.mainwindow.actionQuit.triggered.connect(app.closeAllWindows)
+        self.mainwindow.actionQuit.triggered.connect(quitApplicationt)
         self.mainwindow.StatusBarButton.clicked.connect(self.Sequence)
         self.mainwindow.actionCamera_Simulator_for_testing.triggered.connect(self.SimulatorConnect)
         self.mainwindow.statusbar.showMessage('Connect your camera to start')
         for cam in self.mainwindow.CameraMenu:
-            cam.triggered.connect(lambda: self.CameraConnect(cam.getObjectName()))
+            cam.triggered.connect(lambda: self.CameraConnect(cam.objectName()))
+
+    def quitApplication(self):
+        self.app.closeAllWindows()
+
 
     def SimulatorConnect(self):
         self.camera = camera.CameraSimulator()
@@ -22,8 +26,9 @@ class MainwindowEvents(object):
 
 
     def CameraConnect(self, cam):
+        print ("Trying to connect to ", cam)
         self.camera = camera.Camera()
-        self.camera.connect()
+        self.camera.connect(cam)
         self.mainwindow.StatusBarButton.setEnabled(True)
         self.mainwindow.statusbar.showMessage('Camera connected. Press start to begin')
 
