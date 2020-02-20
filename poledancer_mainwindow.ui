@@ -31,10 +31,32 @@
     <property name="title">
      <string>File</string>
     </property>
-    <addaction name="actionCamera"/>
     <addaction name="actionQuit"/>
    </widget>
+   <widget class="QMenu" name="menuHelp">
+    <property name="title">
+     <string>Help</string>
+    </property>
+    <addaction name="actionManual"/>
+    <addaction name="actionAbout"/>
+   </widget>
+   <widget class="QMenu" name="menuSettings">
+    <property name="title">
+     <string>Settings</string>
+    </property>
+    <addaction name="actionPrefferences"/>
+   </widget>
+   <widget class="QMenu" name="menuCamera">
+    <property name="title">
+     <string>Camera</string>
+    </property>
+    <addaction name="actionCameraConnect"/>
+    <addaction name="actionCameraSettings"/>
+   </widget>
    <addaction name="menuFile"/>
+   <addaction name="menuCamera"/>
+   <addaction name="menuSettings"/>
+   <addaction name="menuHelp"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionQuit">
@@ -45,12 +67,34 @@
     <string>Exit poleseeker</string>
    </property>
   </action>
-  <action name="actionCamera">
+  <action name="actionManual">
    <property name="text">
-    <string>Camera</string>
+    <string>Manual</string>
    </property>
-   <property name="statusTip">
-    <string>Change camera settings</string>
+  </action>
+  <action name="actionAbout">
+   <property name="text">
+    <string>About</string>
+   </property>
+  </action>
+  <action name="actionSettings">
+   <property name="text">
+    <string>Settings</string>
+   </property>
+  </action>
+  <action name="actionPrefferences">
+   <property name="text">
+    <string>Prefferences</string>
+   </property>
+  </action>
+  <action name="actionCameraConnect">
+   <property name="text">
+    <string>Connect</string>
+   </property>
+  </action>
+  <action name="actionCameraSettings">
+   <property name="text">
+    <string>Settings</string>
    </property>
   </action>
  </widget>

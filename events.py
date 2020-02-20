@@ -9,7 +9,7 @@ class MainwindowEvents(object):
         self.camera = camera
         self.mainwindow = mainwindow
         self.mainwindow.actionQuit.triggered.connect(app.closeAllWindows)
-        self.mainwindow.actionCamera.triggered.connect(self.CameraConnect)
+        self.mainwindow.actionCameraConnect.triggered.connect(self.CameraConnect)
         self.mainwindow.StatusBarButton.clicked.connect(self.Sequence)
 
     def CameraConnect(self):
