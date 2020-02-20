@@ -40,7 +40,7 @@ class starCanvas(QLabel):
             painter = QPainter(self)
             painter.setPen(QPen(Qt.red))
             painter.drawLine(self.previous.x(),self.previous.y(),self.Clicked.x(),self.previous.y())
-            painter.setPen(QPen(Qt.blue))
+            painter.setPen(QPen(Qt.green))
             painter.drawLine(self.Clicked.x(),self.previous.y(),self.Clicked.x(),self.Clicked.y())
             return 
         if self.Clicked and self.stage > 1:       

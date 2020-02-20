@@ -1,6 +1,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from poledancer_mainwindow import Ui_MainWindow
 from starcanvas import starCanvas
+import camera
 
 class PoleDancerMainWindow(Ui_MainWindow):
     '''
@@ -13,7 +14,6 @@ class PoleDancerMainWindow(Ui_MainWindow):
         self.starcanvas = starCanvas(MainWindow, self)
         MainWindow.setCentralWidget(self.starcanvas)
         MainWindow.showMaximized()
-        self.statusbar.showMessage('Connect your camera to start')
         self.StatusBarButton = QtWidgets.QPushButton(self.centralwidget)
         #self.StatusBarButton.setGeometry(QtCore.QRect(290, 300, 112, 31))
         self.StatusBarButton.setObjectName("pushButton")
@@ -21,6 +21,16 @@ class PoleDancerMainWindow(Ui_MainWindow):
         self.StatusBarButton.setEnabled(False)
 
         self.statusbar.addPermanentWidget(self.StatusBarButton)
+
+        self.CameraMenu = []
+        for cam in camera.Camera().camera_list():
+            self.CameraMenu.append(QtWidgets.QAction(MainWindow))
+            self.CameraMenu[-1].setObjectName(cam[1])    
+            self.CameraMenu[-1].setText(cam[0])
+            self.menuConnect.addAction(self.CameraMenu[-1])
+
+
+        self.statusbar.showMessage('Connect your camera to start')
 
 
 

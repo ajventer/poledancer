@@ -50,8 +50,13 @@
     <property name="title">
      <string>Camera</string>
     </property>
-    <addaction name="actionCameraConnect"/>
-    <addaction name="actionCameraSettings"/>
+    <widget class="QMenu" name="menuConnect">
+     <property name="title">
+      <string>Connect</string>
+     </property>
+     <addaction name="actionCamera_Simulator_for_testing"/>
+    </widget>
+    <addaction name="menuConnect"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuCamera"/>
@@ -87,14 +92,14 @@
     <string>Prefferences</string>
    </property>
   </action>
-  <action name="actionCameraConnect">
-   <property name="text">
-    <string>Connect</string>
-   </property>
-  </action>
   <action name="actionCameraSettings">
    <property name="text">
     <string>Settings</string>
+   </property>
+  </action>
+  <action name="actionCamera_Simulator_for_testing">
+   <property name="text">
+    <string>Camera Simulator (for testing)</string>
    </property>
   </action>
  </widget>

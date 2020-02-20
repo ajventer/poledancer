@@ -2,17 +2,27 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from poledancer_mainwindow import Ui_MainWindow
 from time import sleep
+import camera
 
 class MainwindowEvents(object):
-    def __init__(self, app, mainwindow, camera):
+    def __init__(self, app, mainwindow):
         self.app = app
-        self.camera = camera
         self.mainwindow = mainwindow
         self.mainwindow.actionQuit.triggered.connect(app.closeAllWindows)
-        self.mainwindow.actionCameraConnect.triggered.connect(self.CameraConnect)
         self.mainwindow.StatusBarButton.clicked.connect(self.Sequence)
+        self.mainwindow.actionCamera_Simulator_for_testing.triggered.connect(self.SimulatorConnect)
+        self.mainwindow.statusbar.showMessage('Connect your camera to start')
+        for cam in self.mainwindow.CameraMenu:
+            cam.triggered.connect(lambda: self.CameraConnect(cam.getObjectName()))
 
-    def CameraConnect(self):
+    def SimulatorConnect(self):
+        self.camera = camera.CameraSimulator()
+        self.mainwindow.StatusBarButton.setEnabled(True)
+        self.mainwindow.statusbar.showMessage('Simulator connected. Press start to begin')
+
+
+    def CameraConnect(self, cam):
+        self.camera = camera.Camera()
         self.camera.connect()
         self.mainwindow.StatusBarButton.setEnabled(True)
         self.mainwindow.statusbar.showMessage('Camera connected. Press start to begin')
