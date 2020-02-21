@@ -10,40 +10,41 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-class Ui_Dialog(object):
-    def setupUi(self, Dialog):
-        Dialog.setObjectName("Dialog")
-        Dialog.resize(400, 300)
-        self.gridLayout = QtWidgets.QGridLayout(Dialog)
+class Ui_Settings(object):
+    def setupUi(self, Settings):
+        Settings.setObjectName("Settings")
+        Settings.setWindowModality(QtCore.Qt.WindowModal)
+        Settings.resize(400, 300)
+        self.gridLayout = QtWidgets.QGridLayout(Settings)
         self.gridLayout.setObjectName("gridLayout")
-        self.DriftTimeLabel = QtWidgets.QLabel(Dialog)
+        self.DriftTimeLabel = QtWidgets.QLabel(Settings)
         self.DriftTimeLabel.setObjectName("DriftTimeLabel")
         self.gridLayout.addWidget(self.DriftTimeLabel, 0, 0, 1, 1)
-        self.doubleSpinBox = QtWidgets.QDoubleSpinBox(Dialog)
-        self.doubleSpinBox.setObjectName("doubleSpinBox")
-        self.gridLayout.addWidget(self.doubleSpinBox, 0, 1, 1, 1)
-        self.buttonBox = QtWidgets.QDialogButtonBox(Dialog)
-        self.buttonBox.setOrientation(QtCore.Qt.Horizontal)
-        self.buttonBox.setStandardButtons(QtWidgets.QDialogButtonBox.Cancel|QtWidgets.QDialogButtonBox.Ok)
-        self.buttonBox.setObjectName("buttonBox")
-        self.gridLayout.addWidget(self.buttonBox, 1, 0, 1, 2)
+        self.DriftTime = QtWidgets.QDoubleSpinBox(Settings)
+        self.DriftTime.setObjectName("DriftTime")
+        self.gridLayout.addWidget(self.DriftTime, 0, 1, 1, 1)
+        self.SettingsButtons = QtWidgets.QDialogButtonBox(Settings)
+        self.SettingsButtons.setOrientation(QtCore.Qt.Horizontal)
+        self.SettingsButtons.setStandardButtons(QtWidgets.QDialogButtonBox.Apply|QtWidgets.QDialogButtonBox.Cancel|QtWidgets.QDialogButtonBox.Reset|QtWidgets.QDialogButtonBox.Save)
+        self.SettingsButtons.setObjectName("SettingsButtons")
+        self.gridLayout.addWidget(self.SettingsButtons, 1, 0, 1, 2)
 
-        self.retranslateUi(Dialog)
-        self.buttonBox.accepted.connect(Dialog.accept)
-        self.buttonBox.rejected.connect(Dialog.reject)
-        QtCore.QMetaObject.connectSlotsByName(Dialog)
+        self.retranslateUi(Settings)
+        self.SettingsButtons.accepted.connect(Settings.accept)
+        self.SettingsButtons.rejected.connect(Settings.reject)
+        QtCore.QMetaObject.connectSlotsByName(Settings)
 
-    def retranslateUi(self, Dialog):
+    def retranslateUi(self, Settings):
         _translate = QtCore.QCoreApplication.translate
-        Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
-        self.DriftTimeLabel.setText(_translate("Dialog", "Drift time (seconds):"))
+        Settings.setWindowTitle(_translate("Settings", "Settings"))
+        self.DriftTimeLabel.setText(_translate("Settings", "Drift time (seconds):"))
 
 
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
-    Dialog = QtWidgets.QDialog()
-    ui = Ui_Dialog()
-    ui.setupUi(Dialog)
-    Dialog.show()
+    Settings = QtWidgets.QDialog()
+    ui = Ui_Settings()
+    ui.setupUi(Settings)
+    Settings.show()
     sys.exit(app.exec_())
