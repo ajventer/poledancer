@@ -79,4 +79,4 @@ class CameraSimulator(Camera):
         return qimage
 
     def exit(self):
-        pass
+        return
