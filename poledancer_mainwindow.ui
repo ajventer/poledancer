@@ -93,11 +93,6 @@
     <string>Prefferences</string>
    </property>
   </action>
-  <action name="actionCameraSettings">
-   <property name="text">
-    <string>Settings</string>
-   </property>
-  </action>
   <action name="actionCamera_Simulator_for_testing">
    <property name="text">
     <string>Camera Simulator (for testing)</string>

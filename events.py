@@ -2,27 +2,64 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from poledancer_mainwindow import Ui_MainWindow
 from poledancer_about import Ui_About
+from poledancer_settings import Ui_Settings
 from time import sleep
+from settings import Settings
 import camera
 import os
 
 class MainwindowEvents(object):
     def __init__(self, app, mainwindow):
+        self.camera = None
         self.app = app
         self.mainwindow = mainwindow
+        self.settings = Settings()
+        self.reset = Settings()
+        self.settings.load()
+        self.reset.load()
         self.mainwindow.actionQuit.triggered.connect(self.quitApplication)
         self.mainwindow.StatusBarButton.clicked.connect(self.Sequence)
         self.mainwindow.actionAbout.triggered.connect(lambda: self.showAbout('about'))
         self.mainwindow.actionLicense.triggered.connect(lambda: self.showAbout('license'))
         self.mainwindow.actionManual.triggered.connect(lambda: self.showAbout('manual'))
         self.mainwindow.actionCamera_Simulator_for_testing.triggered.connect(self.SimulatorConnect)
+        self.mainwindow.actionPrefferences.triggered.connect(self.showSettings)
         self.mainwindow.statusbar.showMessage('Connect your camera to start')
         for cam in self.mainwindow.CameraMenu:
             cam.triggered.connect(lambda: self.CameraConnect(cam.objectName()))
 
     def quitApplication(self):
-        self.camera.exit()
+        if self.camera:
+            self.camera.exit()
         self.app.closeAllWindows()
+
+    def updateSettings(self, task):
+        print (task)
+        if task == 'reset':
+            self.Settings.driftTime.setValue(self.reset['DriftTimer'])                
+        elif task == 'restore':
+            self.settings.restore_defaults()
+            self.Settings.driftTime.setValue(self.settings['DriftTimer'])
+        elif task == 'cancel':
+            self.SettingsDLG.close()
+        elif task == 'save':
+            self.settings['DriftTimer'] = int(self.Settings.driftTime.text())
+            self.settings.save()
+            self.reset.load()
+            self.SettingsDLG.close()
+
+    def showSettings(self):
+        print ("Showing settings dialog")
+        self.SettingsDLG = QtWidgets.QDialog()
+        self.Settings = Ui_Settings()
+        self.Settings.setupUi(self.SettingsDLG)
+        self.Settings.driftTime.setValue(self.settings['DriftTimer'])
+        self.Settings.settingsReset.clicked.connect(lambda: self.updateSettings('reset'))
+        self.Settings.settingsRestore.clicked.connect(lambda: self.updateSettings('restore'))
+        self.Settings.settingsSave.clicked.connect(lambda: self.updateSettings('save'))
+        self.Settings.settingsCancel.clicked.connect(lambda: self.updateSettings('cancel'))
+        self.SettingsDLG.exec_()
+
 
     def showAbout(self, doc):
         here = os.path.abspath(os.path.dirname(os.path.realpath(__file__)))
@@ -49,6 +86,7 @@ class MainwindowEvents(object):
 
     def SimulatorConnect(self):
         self.camera = camera.CameraSimulator()
+        self.camera.driftDelay = self.settings["DriftTimer"]
         self.mainwindow.StatusBarButton.setEnabled(True)
         self.mainwindow.statusbar.showMessage('Simulator connected. Press start to begin')
 
@@ -56,6 +94,7 @@ class MainwindowEvents(object):
     def CameraConnect(self, cam):
         print ("Trying to connect to ", cam)
         self.camera = camera.Camera()
+        self.camera.driftDelay = self.settings["DriftTimer"]
         self.camera.connect(cam)
         self.mainwindow.StatusBarButton.setEnabled(True)
         self.mainwindow.statusbar.showMessage('Camera connected. Press start to begin')
@@ -120,10 +159,3 @@ class MainwindowEvents(object):
             self.sequence3()
         elif self.mainwindow.starcanvas.stage == 4:
             self.sequence4()
-
-
-
-
-        
-
-

@@ -47,8 +47,6 @@ class Ui_MainWindow(object):
         self.actionSettings.setObjectName("actionSettings")
         self.actionPrefferences = QtWidgets.QAction(MainWindow)
         self.actionPrefferences.setObjectName("actionPrefferences")
-        self.actionCameraSettings = QtWidgets.QAction(MainWindow)
-        self.actionCameraSettings.setObjectName("actionCameraSettings")
         self.actionCamera_Simulator_for_testing = QtWidgets.QAction(MainWindow)
         self.actionCamera_Simulator_for_testing.setObjectName("actionCamera_Simulator_for_testing")
         self.actionLicense = QtWidgets.QAction(MainWindow)
@@ -82,7 +80,6 @@ class Ui_MainWindow(object):
         self.actionAbout.setText(_translate("MainWindow", "About"))
         self.actionSettings.setText(_translate("MainWindow", "Settings"))
         self.actionPrefferences.setText(_translate("MainWindow", "Prefferences"))
-        self.actionCameraSettings.setText(_translate("MainWindow", "Settings"))
         self.actionCamera_Simulator_for_testing.setText(_translate("MainWindow", "Camera Simulator (for testing)"))
         self.actionLicense.setText(_translate("MainWindow", "License"))
 
