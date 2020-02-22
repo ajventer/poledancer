@@ -18,8 +18,14 @@ class PoleDancerMainWindow(Ui_MainWindow):
         self.StatusBarButton.setObjectName("pushButton")
         self.StatusBarButton.setText ('Start')
         self.StatusBarButton.setEnabled(False)
+        self.HistoryButton = QtWidgets.QLabel(self.centralwidget)
+        self.HistoryButton.setObjectName("historyButton")
+        self.HistoryButton.setText ('History')
+        self.HistoryButton.setEnabled(True)        
 
+        self.statusbar.addPermanentWidget(self.HistoryButton)
         self.statusbar.addPermanentWidget(self.StatusBarButton)
+
 
         self.CameraMenu = []
         for cam in camera.Camera().camera_list():

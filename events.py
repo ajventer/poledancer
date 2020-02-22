@@ -143,6 +143,7 @@ class MainwindowEvents(object):
 
     def sequence4(self):
         self.mainwindow.starcanvas.calculate_drift()
+        self.mainwindow.HistoryButton.setToolTip('\n'.join(self.mainwindow.starcanvas.history))        
         self.mainwindow.statusbar.showMessage(self.mainwindow.starcanvas.drift_str())
         self.mainwindow.StatusBarButton.setText ('Restart')
         self.mainwindow.starcanvas.stage = 1

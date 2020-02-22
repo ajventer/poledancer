@@ -17,7 +17,7 @@ class starCanvas(QLabel):
         self.drift = None
         self.stage = 1
         self.enabled = True
-
+        self.history = ['Drift history:']
 
     def eventFilter(self, source, event):
         if (source is self and event.type() == QEvent.MouseButtonRelease):
@@ -27,7 +27,6 @@ class starCanvas(QLabel):
     def updateImage(self, image):
         self.pixmap = QPixmap.fromImage(image)
         self.setPixmap(self.pixmap)
-        #self.setPixmap(self.pixmap.scaled(self.size(), Qt.KeepAspectRatio))
         self.update()
 
 
@@ -60,6 +59,7 @@ class starCanvas(QLabel):
         drift_az = self.Clicked.x() - self.previous.x()
         drift_alt = self.Clicked.y() - self.previous.y()
         self.drift = (drift_az, drift_alt)
+        self.history.append('Azimuth: %s / Altitude: %s' %self.drift)
 
     def handleClick(self, pos):
         if not self.enabled:
