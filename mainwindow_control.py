@@ -15,7 +15,6 @@ class PoleDancerMainWindow(Ui_MainWindow):
         MainWindow.setCentralWidget(self.starcanvas)
         MainWindow.showMaximized()
         self.StatusBarButton = QtWidgets.QPushButton(self.centralwidget)
-        #self.StatusBarButton.setGeometry(QtCore.QRect(290, 300, 112, 31))
         self.StatusBarButton.setObjectName("pushButton")
         self.StatusBarButton.setText ('Start')
         self.StatusBarButton.setEnabled(False)

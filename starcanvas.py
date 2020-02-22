@@ -20,15 +20,14 @@ class starCanvas(QLabel):
 
 
     def eventFilter(self, source, event):
-        if (source is self and event.type() == QEvent.Resize):
-            self.setPixmap(self.pixmap.scaled(self.size(), Qt.KeepAspectRatio))
-        elif (source is self and event.type() == QEvent.MouseButtonRelease):
+        if (source is self and event.type() == QEvent.MouseButtonRelease):
             self.handleClick(event.pos())
         return self.mainwindow.eventFilter(source, event)
 
     def updateImage(self, image):
         self.pixmap = QPixmap.fromImage(image)
-        self.setPixmap(self.pixmap.scaled(self.size(), Qt.KeepAspectRatio))
+        self.setPixmap(self.pixmap)
+        #self.setPixmap(self.pixmap.scaled(self.size(), Qt.KeepAspectRatio))
         self.update()
 
 

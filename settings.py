@@ -15,7 +15,7 @@ class Settings(UserDict):
 
     def restore_defaults(self):
         self.data = {
-            "DriftTimer": 30
+            "DriftTimer": 300
         }
 
 
